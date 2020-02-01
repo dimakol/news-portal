@@ -1,12 +1,13 @@
 {
   "name": "socket-io-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Nodejs server that uses Express framework and Socket.IO library",
   "main": "server.js",
   "scripts": {
     "start_local": "node -r dotenv/config server.js",
     "start": "node server.js",
-    "server": "npx nodemon server.js"
+    "server": "npx nodemon server.js",
+    "heroku-postbuild": "cd news-portal && npm install && npm run build"
   },
   "keywords": [],
   "author": "Dima Kolyas <dimakol@gmail.com>",
