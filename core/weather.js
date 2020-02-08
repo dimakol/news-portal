@@ -1,7 +1,7 @@
 //weather.js
 
 const axios = require("axios");
-const apiKeys = require("../apiKeys");
+const { weatherKey } = require('../config');
 
 // weather API Config: Location
 const AshqelonLatLong = "31.6748,34.5750";
@@ -14,7 +14,7 @@ const updateTime = 4 * 60 * 60 * 1000;
 const getWeatherApiAndEmit = async socket => {
     try {
         // getting the data from Dark Sky API
-        const response = await axios.get(`https://api.darksky.net/forecast/${apiKeys.weatherKey}/${AshqelonLatLong}`, {
+        const response = await axios.get(`https://api.darksky.net/forecast/${weatherKey}/${AshqelonLatLong}`, {
             params: {
                 units: 'si',
                 exclude: 'minutely,hourly,alerts,flags'

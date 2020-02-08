@@ -1,7 +1,7 @@
 //finance.js
 
 const axios = require("axios");
-const apiKeys = require("../apiKeys");
+const { financeKey } = require('../config');
 
 var interval;
 // update per 5 minutes
@@ -16,7 +16,7 @@ const getFinanceApiAndEmit = async socket => {
                 function: 'TIME_SERIES_INTRADAY',
                 symbol: 'NDAQ',
                 interval: '5min',
-                apikey: apiKeys.financeKey
+                apikey: financeKey
             }
         });
         // API call frequency is 5 calls per minute and 500 calls per day.

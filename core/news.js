@@ -1,7 +1,7 @@
 //news.js
 
 const axios = require("axios");
-const apiKeys = require("../apiKeys");
+const { newsKey } = require('../config');
 
 var interval;
 // update per 10 minutes
@@ -15,7 +15,7 @@ const getNewsApiAndEmit = async socket => {
             params: {
                 country: 'us',
                 pageSize: 1,
-                apiKey: apiKeys.newsKey
+                apiKey: newsKey
             }
         });
         // emitting a new message. It will be consumed by the client

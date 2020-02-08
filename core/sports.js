@@ -1,7 +1,7 @@
 //sports.js
 
 const axios = require("axios");
-const apiKeys = require("../apiKeys");
+const { sportsKey } = require('../config');
 
 var interval;
 // update per 10 seconds
@@ -16,7 +16,7 @@ const getSportsApiAndEmit = async socket => {
                 status: 'LIVE'
             },
             headers: {
-                'X-Auth-Token': apiKeys.sportsKey
+                'X-Auth-Token': sportsKey
             }
         });
         // emitting a new message. It will be consumed by the client
