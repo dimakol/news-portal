@@ -26,7 +26,8 @@ if (NODE_ENV === 'production') {
   router.use(express.static(path.join(__dirname, '../news-portal/build')));
   // serve the index.html file from the build folder
   router.get('/', (req, res) => {    
-    res.sendfile(path.join(__dirname, '../news-portal/build', 'index.html')); 
+    //res.sendfile(path.join(__dirname, '../news-portal/build', 'index.html')); 
+    res.send({ response: "News Portal Backend" }).status(200);
   });
 }
 // development mode
