@@ -4,6 +4,7 @@ import Grid from './components/Grid';
 //import { currentTime } from './utils/timeUtils';  // for debug
 import './App.css';
 
+
 /**
  * The main application component.
  * In this component the socket.io connection is established with the node.js server.
@@ -20,8 +21,10 @@ class App extends Component {
       financeResponse: false,
       // the sports data that we are receiving from the server.
       sportsResponse: false,
-      // our server endpoint.
-      endpoint: "ws://localhost:5000"
+      // our server endpoint (development mode).
+      //endpoint: "ws://localhost:5000"
+      // our server endpoint (production mode).
+      endpoint: "ws://localhost:80"
     };
   }
 
