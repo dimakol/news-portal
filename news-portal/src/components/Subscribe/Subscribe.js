@@ -34,7 +34,7 @@ class Subscribe extends PureComponent {
         event.preventDefault();
         this.setState({ isLoading: true });
         // post request to the server with the validated email as the body.
-        axios.post( 'http://localhost:80/',
+        axios.post( 'http://localhost:5000/',
                     { email: this.state.email },
                     { headers: { 'Content-Type': 'application/json' } } )
             .then( response => {

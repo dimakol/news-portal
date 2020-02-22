@@ -21,10 +21,8 @@ class App extends Component {
       financeResponse: false,
       // the sports data that we are receiving from the server.
       sportsResponse: false,
-      // our server endpoint (development mode).
-      //endpoint: "ws://localhost:5000"
-      // our server endpoint (production mode).
-      endpoint: "ws://localhost:80"
+      // our server endpoint
+      endpoint: "ws://localhost:5000"
     };
   }
 
