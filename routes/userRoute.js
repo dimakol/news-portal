@@ -3,7 +3,7 @@
 // import external libraries
 const express = require("express");
 const path = require('path');
-const cors = require('cors')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 // import internal libraries
 const { nodeEnv } = require('../config');
@@ -15,7 +15,7 @@ const NODE_ENV = nodeEnv || 'development';
 const router = express.Router();
 
 // create application/json parser
-const jsonParser = bodyParser.json()
+const jsonParser = bodyParser.json();
  
 // enable All CORS Requests
 router.use(cors());
