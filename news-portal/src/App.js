@@ -20,9 +20,7 @@ class App extends Component {
       // the finance data that we are receiving from the server.
       financeResponse: false,
       // the sports data that we are receiving from the server.
-      sportsResponse: false,
-      // our server endpoint
-      endpoint: "ws://localhost:5000"
+      sportsResponse: false
     };
   }
 
@@ -31,9 +29,8 @@ class App extends Component {
    * when some event received storing the data inside our component state. 
    */
   componentDidMount() {
-    const { endpoint } = this.state;
     // making socket request to the server endpoint.
-    const socket = socketIOClient(endpoint);
+    const socket = socketIOClient('/');
     // on news event
     socket.on("News", data => {
       //console.log("[App.js] News Update: ", currentTime());  // Dima debug

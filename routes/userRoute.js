@@ -38,8 +38,8 @@ else {
   });
 }
 
-// define the home page route for POST requests, gets JSON data as body
-router.post('/', jsonParser, (req, res) => {
+// define the api route for POST requests, gets JSON data as body
+router.post('/api', jsonParser, (req, res) => {
   // received empty body
   if (!req.body) return res.sendStatus(400);
   const responseObj = { responseStatus: 'done',
