@@ -38,8 +38,8 @@ class LineChart extends Component {
             yAxes: [
               {
                 ticks: {
-                  min: Math.min(...this.props.data) - 0.15,
-                  max: Math.max(...this.props.data) + 0.15
+                  min: this.findMinforyAxes(),
+                  max: this.findMaxforyAxes()
                 }
               }
             ]
@@ -60,7 +60,31 @@ class LineChart extends Component {
         }
       });
     }
-  
+    
+    /** Return the minimum using some formula to show on the chart for y axes */
+    findMinforyAxes () {
+      const minValue = Math.min(...this.props.data);
+      const minValueDecimal = minValue - Math.floor(minValue);
+      let minYAxes;
+      if ((minValueDecimal >= 0.25 && minValueDecimal <= 0.49) || (minValueDecimal >= 0.75 && minValueDecimal <= 0.99))
+        minYAxes = (Math.round(minValue * 2) / 2) - 0.5;
+      else
+        minYAxes = Math.round(minValue * 2) / 2;
+      return minYAxes;
+    }
+
+    /** Return the maximum using some formula to show on the chart for y axes */
+    findMaxforyAxes () {
+      const maxValue = Math.max(...this.props.data);
+      const maxValueDecimal = maxValue - Math.floor(maxValue);
+      let maxYAxes;
+      if ((maxValueDecimal > 0 && maxValueDecimal <= 0.24) || (maxValueDecimal > 0.5 && maxValueDecimal <= 0.74))
+        maxYAxes = (Math.round(maxValue * 2) / 2) + 0.5;
+      else
+        maxYAxes = Math.round(maxValue * 2) / 2;
+      return maxYAxes;
+    }
+
     render() {
       return <canvas ref={this.chartRef} />;
     }
