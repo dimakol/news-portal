@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
  * Display day card of weekly weather 
  * @param {*} props 
  */
-const DayCard = ( props ) => {
+const DayCard = props => {
         
     const day = props.day;
     const date = props.date;
@@ -21,8 +21,8 @@ const DayCard = ( props ) => {
             {date}
             <br></br>
             <img src={icon} 
-                alt={iconName} 
-                className="small">
+                 alt={iconName} 
+                 className="small">
             </img>
             <br></br>
             {temperatureMin} - {temperatureMax} C°
@@ -31,3 +31,4 @@ const DayCard = ( props ) => {
   }
   
   export default DayCard;
+  

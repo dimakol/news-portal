@@ -4,7 +4,6 @@ import Grid from './components/Grid';
 //import { currentTime } from './utils/timeUtils';  // for debug
 import './App.css';
 
-
 /**
  * The main application component.
  * In this component the socket.io connection is established with the node.js server.
@@ -33,22 +32,22 @@ class App extends Component {
     const socket = socketIOClient('/');
     // on news event
     socket.on("News", data => {
-      //console.log("[App.js] News Update: ", currentTime());  // Dima debug
+      //console.log("[App.js] News Update: ", currentTime());  // for debug
       this.setState({ newsResponse: data })
     });
     // on weather event
     socket.on("Weather", data => {
-      //console.log("[App.js] Weather Update: ", currentTime());   // Dima debug
+      //console.log("[App.js] Weather Update: ", currentTime());   // for debug
       this.setState({ weatherResponse: data })
     });
     // on finance event
     socket.on("Finance", data => {
-      //console.log("[App.js] Finance Update: ", currentTime());   // Dima debug
+      //console.log("[App.js] Finance Update: ", currentTime());   // for debug
       this.setState({ financeResponse: data })
     });
     // on sports event
     socket.on("Sports", data => {
-      //console.log("[App.js] Sports Update: ", currentTime());  // Dima debug
+      //console.log("[App.js] Sports Update: ", currentTime());  // for debug
       this.setState({ sportsResponse: data })
     });
   }

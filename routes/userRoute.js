@@ -32,8 +32,6 @@ if (NODE_ENV === 'production') {
 // development mode
 else {
   router.get('/', (req, res) => {  
-    // serve the index.html file from the public folder
-    //res.sendFile(path.join(__dirname, '../news-portal/public', 'index.html'));
     res.send({ response: "News Portal Backend" }).status(200);
   });
 }

@@ -12,8 +12,11 @@ import thunderstorm from '../assets/images/weather/thunderstorm.svg';
 import tornado from '../assets/images/weather/tornado.svg';
 import wind from '../assets/images/weather/wind.svg';
 
-// Set the weather icon according the given name
-export const setWeatherIcon = (iconName) => {
+/**
+ * Set the weather icon according the given name
+ * @param {String} iconName - the icon name as we get from the API
+ */
+export const setWeatherIcon = iconName => {
     let img;
 
     switch (iconName) {

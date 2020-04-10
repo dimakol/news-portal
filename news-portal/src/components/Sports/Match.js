@@ -1,6 +1,10 @@
 import React from 'react';
 
-const match = (props) => {
+/**
+ * Live football match
+ * @param {*} props 
+ */
+const match = props => {
     return (
         <div className="margin-top-20" key={props.id}>
             { props.status === "IN_PLAY" ?

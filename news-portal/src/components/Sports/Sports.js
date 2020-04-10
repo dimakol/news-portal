@@ -3,14 +3,14 @@ import Card from 'react-bootstrap/Card';
 import Matches from '../Sports/Matches';
 
 /**
- * The Sports component widget displays the current score of a sports match. 
+ * The Sports component widget displays the current score of a football matches. 
  * This tile should update every 1 second.
  */
 class Sports extends PureComponent {
     render() {
-        //console.log("[Sports.js] render");   // Dima debug
+        //console.log("[Sports.js] render");   // for debug
 
-        return(
+        return (
             <Card className="col-md-4" border="dark">
                 <Card.Body>
                     <Card.Title><b>Sports</b></Card.Title>

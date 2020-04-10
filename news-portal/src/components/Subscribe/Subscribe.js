@@ -19,18 +19,24 @@ class Subscribe extends PureComponent {
         }
     }
     
-    // Checking if user already subscribed
+    /**
+     * Checking if user already subscribed
+     */
     componentDidMount() {
         // retrieve session
         if (sessionStorage.getItem("email"))
             this.setState({ isSubscribed: true });
     }
 
-    // Input handling
-    handleUserInput = (event) => this.setState({ email: event.target.value });
+    /**
+     * Input handling
+     */
+    handleUserInput = event => this.setState({ email: event.target.value });
     
-    // Form submit
-    handleSubmit = (event) => {
+    /**
+     * Form submit
+     */
+    handleSubmit = event => {
         event.preventDefault();
         this.setState({ isLoading: true });
         // post request to the server with the validated email as the body.
@@ -52,8 +58,10 @@ class Subscribe extends PureComponent {
             } );
     }
 
-    // Storing session for user subscription
-    sessionStore = (email) => {
+    /**
+     * Storing session for user subscription
+     */
+    sessionStore = email => {
         // check browser support for storage
         if (typeof(Storage) !== "undefined") 
             sessionStorage.setItem("email", email); // store session of the email
@@ -62,11 +70,11 @@ class Subscribe extends PureComponent {
     }
 
     render() {
-        //console.log("[Subscribe.js] render");    // Dima debug
+        //console.log("[Subscribe.js] render");    // for debug
 
         const { email, isLoading, isSubscribed } = this.state;
 
-        return(
+        return (
             <Card className="col-md-4" border="dark">
                 <Card.Body>
                     <Card.Title><b>Subscribe for updates</b></Card.Title>

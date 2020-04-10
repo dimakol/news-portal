@@ -16,7 +16,7 @@ class Finance extends PureComponent {
     }
 
     render() {
-        //console.log("[Finance.js] render");  // Dima debug
+        //console.log("[Finance.js] render");  // for debug
         
         if (this.props.response) {
             this.label = this.props.response['Meta Data']['2. Symbol'];
@@ -25,10 +25,10 @@ class Finance extends PureComponent {
             // filter labels by same date
             this.labels = Object.keys(timeSeries).filter(datetime => datetime.split(' ')[0] === this.lastUpdatedDateTime.split(' ')[0]);
             // take the close values sliced by same date
-            this.data = Object.values(timeSeries).slice(0, this.labels.length).map(d => d["4. close"]);
+            this.data = Object.values(timeSeries).slice(0, this.labels.length).map(d => d['4. close']);
         }
 
-        return(
+        return (
             <Card className="col-md-4" border="dark">
                 <Card.Body>
                     <Card.Title><b>Finance</b></Card.Title>

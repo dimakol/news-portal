@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
  * Modal window that shows the full article of the latest news.
  * @param {*} props 
  */
-const NewsModal = (props) => {
+const NewsModal = props => {
     return (
         <Modal 
             size="lg"

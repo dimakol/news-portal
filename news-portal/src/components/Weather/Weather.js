@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import CurrentWeather from './Current';
 import DayCard from './DayCard';
 import { unixTimeStamptoDateTime, unixTimeStamptoDate, unixTimeStamptoDayOfWeek } from '../../utils/timeUtils';
-import {setWeatherIcon} from '../../utils/imageUtils';
+import { setWeatherIcon } from '../../utils/imageUtils';
 
 /**
  * The Weather component widget displays the current weather conditions. 
@@ -16,16 +16,18 @@ class Weather extends PureComponent {
         this.state = { isWeekly: false };
       }
     
-    // Toogle between day and week display
+    /**
+     * Toogle between day and week display
+     */
     toogleDayWeek = () => this.setState({ isWeekly: !this.state.isWeekly });
     
     render() {
-        //console.log("[Weather.js] render");  // Dima debug
+        //console.log("[Weather.js] render");  // for debug
 
         const { isWeekly } = this.state;
         
-        return(
-            <Card className="col-md-8" border="dark" onClick={this.toogleDayWeek}>
+        return (
+            <Card className="col-md-8 cursor-pointer" border="dark" onClick={this.toogleDayWeek}>
                 <Card.Body>
                     <Card.Title><b>Weather</b></Card.Title>
                     {!this.props.response ? <Card.Text>Loading...</Card.Text> :
@@ -35,9 +37,9 @@ class Weather extends PureComponent {
                                             icon={setWeatherIcon(this.props.response.currently.icon)} 
                                             iconName={this.props.response.currently.icon} 
                                             summary={this.props.response.currently.summary}
-                                            time={unixTimeStamptoDateTime(this.props.response.currently.time)}/> :
+                                            time={unixTimeStamptoDateTime(this.props.response.currently.time)} /> :
                             // weekly weather
-                            this.props.response.daily.data.map((dayData, index) => 
+                            this.props.response.daily.data.map( (dayData, index) => 
                                 <DayCard key={index}
                                          day={unixTimeStamptoDayOfWeek(dayData.time)}
                                          date={unixTimeStamptoDate(dayData.time)}
@@ -45,7 +47,7 @@ class Weather extends PureComponent {
                                          iconName={dayData.icon}
                                          temperatureMin={Math.round(dayData.temperatureMin)}
                                          temperatureMax={Math.round(dayData.temperatureMax)}
-                                         summary={dayData.summary} />)       
+                                         summary={dayData.summary} />)
                     }
                 </Card.Body>
             </Card>

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
  * The form of the subscription.
  * @param {*} props 
  */
-const MyForm = (props) => {
+const MyForm = props => {
     return (
         <form className="padding-top-10" onSubmit={props.handleSubmit}>
             <input className="col-md-12" 

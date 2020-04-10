@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
  * Display the current weather
  * @param {*} props 
  */
-const Current = ( props ) => {
+const Current = props => {
         
     const temperature = props.temperature;
     const icon = props.icon;
@@ -14,7 +14,7 @@ const Current = ( props ) => {
     const time = props.time;
     
     return (
-        <div>
+        <React.Fragment>
             <Card.Subtitle className="inline-block margin-left-14-percent">
                 <div className="inline-block">
                     <h1>{temperature} C°</h1>
@@ -22,16 +22,16 @@ const Current = ( props ) => {
                     <h3>{summary}</h3>
                 </div>
                 <img src={icon} 
-                    alt={iconName} 
-                    className="align-right medium">
+                     alt={iconName} 
+                     className="align-right medium">
                 </img>
-
             </Card.Subtitle>
             <Card.Text>
                 <small className="text-muted">Updated {time}</small>
             </Card.Text>
-        </div>
+        </React.Fragment>
     )
   }
   
   export default Current;
+  

@@ -14,10 +14,14 @@ class News extends PureComponent {
         this.state = { showModal: false };
     }
     
-    // Closes the modal
+    /**
+     * Closes the modal
+     */
     handleClose = () => this.setState({ showModal: false });
 
-    // Opens the modal if data exists
+    /**
+     * Opens the modal if data exists
+     */
     handleShow = () => {
         if (this.props.response) {
             this.setState({ showModal: true })
@@ -25,13 +29,13 @@ class News extends PureComponent {
     };
     
     render() {
-        //console.log("[News.js] render"); // Dima debug
+        //console.log("[News.js] render"); // for debug
 
         const { showModal } = this.state;
         
-        return(
-            <>
-                <Card className="col-md-4" border="dark" onClick={this.handleShow}>
+        return (
+            <React.Fragment>
+                <Card className="col-md-4 cursor-pointer" border="dark" onClick={this.handleShow}>
                     <Card.Body>
                         <Card.Title><b>News update</b></Card.Title>
                         {!this.props.response ? <Card.Text>Loading...</Card.Text> :
@@ -48,8 +52,8 @@ class News extends PureComponent {
                            title={this.props.response.title}
                            description={this.props.response.description}
                            url={this.props.response.url}
-                           urlToImage={this.props.response.urlToImage}/>
-            </>
+                           urlToImage={this.props.response.urlToImage} />
+            </React.Fragment>
         );
     }
 }

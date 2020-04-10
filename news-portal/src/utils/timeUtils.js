@@ -1,10 +1,12 @@
-
-// Convert a Unix timestamp to date time in MM-dd hh:mm format,
-// if 'showSeconds' parameter is true then the seconds will also be shown
-// if 'showDate' parameter is false then the MM-dd(month and day) will not be shown
-export const unixTimeStamptoDateTime = (unixTimeStamp, showSeconds=false, showDate=true) => {
+/**
+ * Convert a Unix timestamp to date time in "MM-dd hh:mm" format.
+ * @param {Number} unixTimeStamp
+ * @param {Boolean} showSeconds - default = false, if this parameter is true then the seconds will also be shown.
+ * @param {Boolean} showDate - default = true, if this parameter is false then the MM-dd(month and day) will not be shown.
+ */
+export const unixTimeStamptoDateTime = (unixTimeStamp, showSeconds = false, showDate = true) => {
     // Months array
-    const months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const months_arr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // Convert timestamp to milliseconds
     const date = new Date(unixTimeStamp * 1000);
     // Month
@@ -47,10 +49,13 @@ export const unixTimeStamptoDateTime = (unixTimeStamp, showSeconds=false, showDa
     return formatedTime;
 }
 
-// Convert a Unix timestamp to date in MM dd format
-export const unixTimeStamptoDate = (unixTimeStamp) => {
+/**
+ * Convert a Unix timestamp to date in "MM dd" format.
+ * @param {Number} unixTimeStamp 
+ */
+export const unixTimeStamptoDate = unixTimeStamp => {
     // Months array
-    const months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const months_arr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // Convert timestamp to milliseconds
     const date = new Date(unixTimeStamp * 1000);
     // Month
@@ -60,24 +65,35 @@ export const unixTimeStamptoDate = (unixTimeStamp) => {
     return month + ' ' + day;
 }
 
-// Convert a Unix timestamp to day of week
-export const unixTimeStamptoDayOfWeek = (unixTimeStamp) => {
-    // Months array
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+/**
+ * Convert a Unix timestamp to day of week.
+ * @param {Number} unixTimeStamp 
+ */
+export const unixTimeStamptoDayOfWeek = unixTimeStamp => {
+    // Days of week array
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     // Convert timestamp to milliseconds
     const date = new Date(unixTimeStamp * 1000);
     return days[date.getDay()];
 }
 
-// Removes the unnecessary parts
-export const newsTimeFormat = (publishedAt) => {
+/**
+ * Removes the unnecessary parts - the T and the Z.
+ * @param {String} publishedAt - "yyyy-dd-mmThh:mm:ssZ"
+ */
+export const newsTimeFormat = publishedAt => {
     let formatedTime;
+    // removes the Z
     formatedTime = publishedAt.slice(0, publishedAt.length-1);
+    // replacing the T with space
     formatedTime = formatedTime.replace('T', ' ');
+    // "yyyy-dd-mm hh:mm:ss"
     return formatedTime;
 }
 
-// Return current time hh:mm:ss format
+/**
+ * Return the current time "hh:mm:ss" format.
+ */
 export const currentTime = () => {
     const today = new Date();
     // Hours
@@ -92,10 +108,10 @@ export const currentTime = () => {
 }
 
 /**
- * Convert time to seconds only
- * @param {*} time - "HH:MM:SS" as well as "MM:SS" or "SS"
+ * Convert time to seconds only.
+ * @param {String} time - "HH:MM:SS" as well as "MM:SS" or "SS"
  */
-const hmsToSecondsOnly = (time) => {
+const hmsToSecondsOnly = time => {
     let splittedTime = time.split(':');
     let seconds = 0; 
     let minutes = 1;
@@ -110,9 +126,9 @@ const hmsToSecondsOnly = (time) => {
 
 /**
  * Calculates and return the live time of the match in minutes.
- * @param {*} startDate - The start date of the match in format: YYYY-MM-DDTHH:MM:SSZ
- * @param {*} lastUpdatedDate - The last updated date of the match in format: YYYY-MM-DDTHH:MM:SSZ
- * @param {*} afterHalfTime - true if the match at second half and false if the match at first half 
+ * @param {String} startDate - The start date of the match in format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {String} lastUpdatedDate - The last updated date of the match in format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {Boolean} afterHalfTime - true if the match at second half and false if the match at first half 
  */
 export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
     const slicedStartDate = startDate.slice(0, startDate.length-1);
@@ -133,7 +149,6 @@ export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
             // Not returning the live time after half time 
             // because we don't have enought data from the API about how much time takes the injury time
             liveTime = "2nd H";
-            //liveTime -= 15;
         }
         // First Half
         else 

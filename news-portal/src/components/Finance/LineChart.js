@@ -62,7 +62,7 @@ class LineChart extends Component {
     }
     
     /** Return the minimum using some formula to show on the chart for y axes */
-    findMinforyAxes () {
+    findMinforyAxes() {
       const minValue = Math.min(...this.props.data);
       const minValueDecimal = minValue - Math.floor(minValue);
       let minYAxes;
@@ -74,7 +74,7 @@ class LineChart extends Component {
     }
 
     /** Return the maximum using some formula to show on the chart for y axes */
-    findMaxforyAxes () {
+    findMaxforyAxes() {
       const maxValue = Math.max(...this.props.data);
       const maxValueDecimal = maxValue - Math.floor(maxValue);
       let maxYAxes;
@@ -91,3 +91,4 @@ class LineChart extends Component {
   }
 
   export default LineChart;
+  
