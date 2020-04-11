@@ -1,6 +1,6 @@
 {
-  "name": "socket-io-server",
-  "version": "0.1.0",
+  "name": "news-portal",
+  "version": "1.0.0",
   "description": "Nodejs server that uses Express framework and Socket.IO library",
   "main": "server.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "dev": "concurrently \"npm run start_local\" \"npm run client\"",
     "heroku-postbuild": "npm install --prefix news-portal && npm run build --prefix news-portal"
   },
-  "keywords": [],
+  "keywords": ["node", "heroku", "express"],
   "author": "Dima Kolyas <dimakol@gmail.com>",
   "license": "ISC",
   "dependencies": {
@@ -26,5 +26,8 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "12.14.x"
   }
 }
