@@ -18,7 +18,7 @@ const NewsModal = props => {
             {props.description || props.url || props.urlToImage ?
                 <Modal.Body>
                     <p>{props.description}</p>
-                    <p className="center-text"><a href={props.url}>The direct URL to the article.</a></p>
+                    <p className="center-text"><a href={props.url} target="_blank">The direct URL to the article.</a></p>
                     {props.urlToImage ?
                         <img src={props.urlToImage} 
                             alt='Article Img'
