@@ -20,7 +20,7 @@
   "author": "Dima Kolyas <dimakol@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
