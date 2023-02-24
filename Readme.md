@@ -21,12 +21,14 @@ The motivation behind this project was to build a web application that connects 
 ## Tech/framework used
 
 **Client-side:**
--   [ReactJS](https://reactjs.org/)
+
+- [ReactJS](https://reactjs.org/)
 
 **Server-side:**
--   [Node.js](https://nodejs.org/en/)
--   [Express](https://expressjs.com/)
--   [Socket.io](https://socket.io/)
+
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [Socket.io](https://socket.io/)
 
 ## Features
 
@@ -43,6 +45,7 @@ The motivation behind this project was to build a web application that connects 
 ## Code Example
 
 Connecting to third-party API and emitting the JSON result to the client using socket
+
 ```
 //news.js
 
@@ -62,7 +65,7 @@ const getNewsApiAndEmit = async socket => {
         });
         // emitting a new message. It will be consumed by the client
         socket.emit("News", response.data.articles[0]);
-    } 
+    }
     catch (error) {
         console.error(`News Error: ${error.code}`);
     }
@@ -73,16 +76,16 @@ const getNewsApiAndEmit = async socket => {
 
 **Running in development environment**
 
-	git, npm and node softwares should be installed
-	before moving on
-	
- - git clone https://github.com/dimakol/News-Portal.git
- - cd News-Portal/
- - npm install - installing the node modules at server folder.
- - cd news-portal/
- - npm install - installing the node modules at client folder.
- - cd .. - returning to the root folder of the project.
-- creating .env file like .env.example file in the root of the folder and setting your API keys instead of the asterisks (***)
+    git, npm and node softwares should be installed
+    before moving on
+
+- git clone https://github.com/dimakol/News-Portal.git
+- cd News-Portal/
+- npm install - installing the node modules at server folder.
+- cd news-portal/
+- npm install - installing the node modules at client folder.
+- cd .. - returning to the root folder of the project.
+- creating .env file like .env.example file in the root of the folder and setting your API keys instead of the asterisks (\*\*\*)
 - npm run dev
 
 ## API Reference
@@ -92,17 +95,18 @@ const getNewsApiAndEmit = async socket => {
 - https://www.alphavantage.co/documentation/ - Alpha Vantage API
 - https://www.football-data.org/documentation/quickstart - Football-Data API
 
-## Deployed to Heroku
+## Deployed to Render
 
-https://my-news-portal.herokuapp.com/
+https://my-news-portal.onrender.com
 
 ## Credits
 
 - https://www.valentinog.com/blog/socket-react/ - Socket.IO, React and Node.js: Going Real-Time with WebSockets.
 - https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786 - Node.js Everywhere with Environment Variables!
-- https://www.freecodecamp.org/news/how-to-deploy-a-react-app-with-an-express-server-on-heroku-32244fe5a250/ - How to deploy a React app with an Express server on Heroku
 - https://github.com/chimurai/http-proxy-middleware - http-proxy-middleware
 - https://www.chartjs.org/docs/latest/ - Chart.js
+- https://www.freecodecamp.org/news/how-to-deploy-a-react-app-with-an-express-server-on-heroku-32244fe5a250/ - How to deploy a React app with an Express server on Heroku
+- https://render.com/docs/migrate-from-heroku - Migrate from Heroku to Render
 
 ## License
 
