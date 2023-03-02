@@ -14,8 +14,8 @@
   },
   "keywords": [
     "node",
-    "heroku",
-    "express"
+    "express",
+    "socket-io"
   ],
   "author": "Dima Kolyas <dimakol@gmail.com>",
   "license": "ISC",
