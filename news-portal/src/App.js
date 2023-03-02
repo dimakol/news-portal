@@ -37,7 +37,7 @@ class App extends Component {
     });
     // on weather event
     socket.on("Weather", (data) => {
-      //console.log("[App.js] Weather Update: ", data, currentTime());   // for debug
+      //console.log("[App.js] Weather Update: ", data, currentTime()); // for debug
       this.setState({ weatherResponse: data });
     });
     // on finance event
