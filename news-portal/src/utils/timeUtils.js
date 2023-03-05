@@ -201,7 +201,7 @@ export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
     liveTime = Math.floor(liveTime / 60);
     strTime = liveTime + "'";
     // Second Half
-    if (afterHalfTime || liveTime > 60) {
+    if (afterHalfTime) {
       // Not returning the live time after half time
       // because we don't have enought data from the API about how much time takes the injury time
       strTime = "2nd H";
@@ -209,8 +209,8 @@ export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
     // First Half
     else {
       if (liveTime > 45) {
-        // Display 45+
-        strTime = "45+'";
+        // Not returning the live time before half time
+        strTime = "1st H";
       }
     }
   }
