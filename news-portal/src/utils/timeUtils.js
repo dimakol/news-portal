@@ -126,6 +126,16 @@ export const unixTimeStamptoDayOfWeek = (unixTimeStamp) => {
 };
 
 /**
+ * Convert Date to Unix timestamp
+ * @param {string} strDate - date
+ * @returns {number} time stamp
+ */
+export const dateToTimeStamp = (strDate) => {
+  const dt = Date.parse(strDate);
+  return dt / 1000;
+};
+
+/**
  * Removes the unnecessary parts - the T and the Z.
  * @param {String} publishedAt - "yyyy-dd-mmThh:mm:ssZ"
  */

@@ -39,7 +39,13 @@ img.align-left {
 
 img.align-right {
   float: right;
-  margin-left: 10px;
+  margin-left: 40px;
+}
+
+img.align-right-bottom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .center-image {
