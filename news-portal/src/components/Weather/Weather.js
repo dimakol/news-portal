@@ -80,7 +80,7 @@ class Weather extends PureComponent {
             <img
               src={poweredByTommorow}
               alt="Powered by Tomorrow.io"
-              className="align-right-bottom"
+              className="medium align-right-bottom"
             ></img>
           )}
         </Card.Body>
