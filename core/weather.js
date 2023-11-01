@@ -9,12 +9,14 @@ const ENDPOINTS = [
   `${WEATHER_API_URL}/realtime`,
   `${WEATHER_API_URL}/forecast`,
 ];
+
 const CITY_NAME = "ashkelon";
 // possible units of measurement
 const UNITS = {
   METRIC: "metric",
   IMPERIAL: "imperial",
 };
+
 const queryParams = {
   location: CITY_NAME,
   apikey: WEATHER_API_KEY,

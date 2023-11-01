@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
   console.log("New client connected: ", socket.id);
 
   // initial presentation of news data
-  news.getNewsApiAndEmit(socket);
+  news.getNewsFromApiAndEmit(socket);
   // news data update every 10 minutes
   news.handleUpdate(socket);
   // initial presentation of weather data
@@ -48,11 +48,11 @@ io.on("connection", (socket) => {
   // weather data update every 4 hours
   weather.handleUpdate(socket);
   // initial presentation of finance chart
-  finance.getFinanceApiAndEmit(socket);
+  finance.getFinanceFromApiAndEmit(socket);
   // finance chart update every 5 minutes
   finance.handleUpdate(socket);
   // initial presentation of sports data
-  sports.getSportsApiAndEmit(socket);
+  sports.getSportsFromApiAndEmit(socket);
   // sports data update every 10 seconds
   sports.handleUpdate(socket);
 
