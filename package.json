@@ -1,5 +1,5 @@
 {
-  "name": "news-portal",
+  "name": "my-news-portal",
   "version": "1.0.0",
   "description": "Nodejs server that uses Express framework and Socket.IO library",
   "main": "server.js",
