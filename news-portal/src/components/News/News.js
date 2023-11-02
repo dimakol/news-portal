@@ -32,6 +32,8 @@ class News extends PureComponent {
     //console.log("[News.js] render"); // for debug
 
     const { showModal } = this.state;
+    const { publishedAt, title, description, url, urlToImage } =
+      this.props.response;
 
     return (
       <React.Fragment>
@@ -49,10 +51,9 @@ class News extends PureComponent {
             ) : (
               <div className="padding-top-20">
                 <h5 className="red">
-                  Breaking news!{" "}
-                  {formatISODate(this.props.response.publishedAt)}
+                  Breaking news! {formatISODate(publishedAt)}
                 </h5>
-                <h4 className="padding-top-10">{this.props.response.title}</h4>
+                <h4 className="padding-top-10">{title}</h4>
               </div>
             )}
           </Card.Body>
@@ -61,10 +62,10 @@ class News extends PureComponent {
         <NewsModal
           show={showModal}
           handleClose={this.handleClose}
-          title={this.props.response.title}
-          description={this.props.response.description}
-          url={this.props.response.url}
-          urlToImage={this.props.response.urlToImage}
+          title={title}
+          description={description}
+          url={url}
+          urlToImage={urlToImage}
         />
       </React.Fragment>
     );

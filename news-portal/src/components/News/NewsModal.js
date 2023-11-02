@@ -3,33 +3,45 @@ import { Modal, Button } from "react-bootstrap";
 
 /**
  * Modal window that shows the full article of the latest news.
- * @param {*} props
+ * @param {boolean} show - show/hide modal.
+ * @param {function} handleClose - function that hide the modal.
+ * @param {string} title - The headline or title of the article.
+ * @param {string} description - A description or snippet from the article.
+ * @param {string} url - The direct URL to the article.
+ * @param {string} urlToImage - The URL to a relevant image for the article.
  */
-const NewsModal = (props) => {
+const NewsModal = ({
+  show,
+  handleClose,
+  title,
+  description,
+  url,
+  urlToImage,
+}) => {
   return (
-    <Modal size="lg" scrollable show={props.show} onHide={props.handleClose}>
+    <Modal size="lg" scrollable show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{props.title}</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      {props.description || props.url || props.urlToImage ? (
+      {(description.length || url.length || urlToImage.length) && (
         <Modal.Body>
-          <p>{props.description}</p>
+          <p>{description}</p>
           <p className="center-text">
-            <a href={props.url} target="_blank" rel="noopener noreferrer">
+            <a href={url} target="_blank" rel="noopener noreferrer">
               The direct URL to the article.
             </a>
           </p>
-          {props.urlToImage ? (
+          {urlToImage.length && (
             <img
-              src={props.urlToImage}
+              src={urlToImage}
               alt="Article Img"
               className="medium center-image"
             ></img>
-          ) : null}
+          )}
         </Modal.Body>
-      ) : null}
+      )}
       <Modal.Footer>
-        <Button variant="primary" onClick={props.handleClose}>
+        <Button variant="primary" onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

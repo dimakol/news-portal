@@ -27,8 +27,8 @@ const getNewsFromApiAndEmit = async (socket) => {
     const response = await axios.get(NEWS_API_URL, {
       params: queryParams,
     });
-    // the request was successful
-    if (response.data.status === "ok") {
+    // the request was successful and has articles
+    if (response.data.status === "ok" && response.data.articles.length) {
       // emitting a new message. It will be consumed by the client
       socket.emit("News", response.data.articles[0]);
     }
