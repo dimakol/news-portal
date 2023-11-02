@@ -1,3 +1,5 @@
+// Weather images src: https://github.com/tomorrow-io-api/tomorrow-weather-codes/tree/master
+
 import clear from "../assets/images/weather/10000_clear_large@2x.png";
 import mostlyClear from "../assets/images/weather/11000_mostly_clear_large@2x.png";
 import partlyCloudy from "../assets/images/weather/11010_partly_cloudy_large@2x.png";

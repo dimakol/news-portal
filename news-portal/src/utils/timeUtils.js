@@ -1,3 +1,5 @@
+import { daysArr, monthsArr } from "./parseUtils";
+
 /**
  * Convert a Unix timestamp to date time in "MM-dd hh:mm" format.
  * @param {Number} unixTimeStamp
@@ -9,67 +11,42 @@ export const unixTimeStamptoDateTime = (
   showSeconds = false,
   showDate = true
 ) => {
-  // Months array
-  const months_arr = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   // Convert timestamp to milliseconds
   const date = new Date(unixTimeStamp * 1000);
   // Month
-  const month = months_arr[date.getMonth()];
+  const month = monthsArr[date.getMonth()];
   // Day
   const day = date.getDate();
   // Hours
   const hours = date.getHours();
   // Minutes
-  const minutes = "0" + date.getMinutes();
+  const minutes = `0${date.getMinutes()}`.slice(-2);
   // Seconds
-  const seconds = "0" + date.getSeconds();
+  const seconds = `0${date.getSeconds()}`.slice(-2);
 
   // The returned time
   let formatedTime;
   if (showDate) {
     if (showSeconds) {
       // Return time in MM-dd hh:mm:ss format
-      formatedTime =
-        month +
-        "-" +
-        day +
-        " " +
-        hours +
-        ":" +
-        minutes.substr(-2) +
-        ":" +
-        seconds.substr(-2);
+      formatedTime = `${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
     // Doesn't show the seconds
     else {
       // Return time in MM-dd hh:mm format
-      formatedTime = month + "-" + day + " " + hours + ":" + minutes.substr(-2);
+      formatedTime = `${month}-${day} ${hours}:${minutes}`;
     }
   }
   // Doesn't show the date
   else {
     if (showSeconds) {
       // Return time in hh:mm:ss format
-      formatedTime =
-        hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+      formatedTime = `${hours}:${minutes}:${seconds}`;
     }
     // Doesn't show the seconds
     else {
       // Return time in hh:mm format
-      formatedTime = hours + ":" + minutes.substr(-2);
+      formatedTime = `${hours}:${minutes}`;
     }
   }
 
@@ -81,28 +58,13 @@ export const unixTimeStamptoDateTime = (
  * @param {Number} unixTimeStamp
  */
 export const unixTimeStamptoDate = (unixTimeStamp) => {
-  // Months array
-  const months_arr = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   // Convert timestamp to milliseconds
   const date = new Date(unixTimeStamp * 1000);
   // Month
-  const month = months_arr[date.getMonth()];
+  const month = monthsArr[date.getMonth()];
   // Day
   const day = date.getDate();
-  return month + " " + day;
+  return `${month} ${day}`;
 };
 
 /**
@@ -110,19 +72,9 @@ export const unixTimeStamptoDate = (unixTimeStamp) => {
  * @param {Number} unixTimeStamp
  */
 export const unixTimeStamptoDayOfWeek = (unixTimeStamp) => {
-  // Days of week array
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
   // Convert timestamp to milliseconds
   const date = new Date(unixTimeStamp * 1000);
-  return days[date.getDay()];
+  return daysArr[date.getDay()];
 };
 
 /**
@@ -131,22 +83,16 @@ export const unixTimeStamptoDayOfWeek = (unixTimeStamp) => {
  * @returns {number} time stamp
  */
 export const dateToTimeStamp = (strDate) => {
-  const dt = Date.parse(strDate);
-  return dt / 1000;
+  return Date.parse(strDate) / 1000;
 };
 
 /**
- * Removes the unnecessary parts - the T and the Z.
- * @param {String} publishedAt - "yyyy-dd-mmThh:mm:ssZ"
+ * Replace T with empty whitespace and replace Z with no character
+ * @param {String} ISODate - ISO 8601 format - "yyyy-mm-ddThh:mm:ssZ"
+ * @returns "yyyy-mm-dd hh:mm:ss" format
  */
-export const newsTimeFormat = (publishedAt) => {
-  let formatedTime;
-  // removes the Z
-  formatedTime = publishedAt.slice(0, publishedAt.length - 1);
-  // replacing the T with space
-  formatedTime = formatedTime.replace("T", " ");
-  // "yyyy-dd-mm hh:mm:ss"
-  return formatedTime;
+export const formatISODate = (ISODate) => {
+  return ISODate.replace("T", " ").replace("Z", "");
 };
 
 /**
@@ -155,14 +101,13 @@ export const newsTimeFormat = (publishedAt) => {
 export const currentTime = () => {
   const today = new Date();
   // Hours
-  const hours = "0" + today.getHours();
+  const hours = `0${today.getHours()}`.slice(-2);
   // Minutes
-  const minutes = "0" + today.getMinutes();
+  const minutes = `0${today.getMinutes()}`.slice(-2);
   // Seconds
-  const seconds = "0" + today.getSeconds();
+  const seconds = `0${today.getSeconds()}`.slice(-2);
   // Time in required format
-  const time =
-    hours.substr(-2) + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+  const time = `${hours}:${minutes}:${seconds}`;
   return time;
 };
 
@@ -209,18 +154,18 @@ export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
       hmsToSecondsOnly(splittedStartDate[1]);
     // Convert to minutes
     liveTime = Math.floor(liveTime / 60);
-    strTime = liveTime + "'";
+    strTime = `${liveTime}'`;
     // Second Half
     if (afterHalfTime) {
       // Not returning the live time after half time
       // because we don't have enought data from the API about how much time takes the injury time
-      strTime = "2nd H";
+      strTime = `2nd H`;
     }
     // First Half
     else {
       if (liveTime > 45) {
         // Not returning the live time before half time
-        strTime = "1st H";
+        strTime = `1st H`;
       }
     }
   }

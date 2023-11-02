@@ -32,22 +32,22 @@ class App extends Component {
     const socket = socketIOClient("/");
     // on news event
     socket.on("News", (data) => {
-      //console.log("[App.js] News Update: ", data, currentTime()); // for debug
+      //console.warn("[App.js] News Update: ", data, currentTime()); // for debug
       this.setState({ newsResponse: data });
     });
     // on weather event
     socket.on("Weather", (data) => {
-      //console.log("[App.js] Weather Update: ", data, currentTime()); // for debug
+      //console.warn("[App.js] Weather Update: ", data, currentTime()); // for debug
       this.setState({ weatherResponse: data });
     });
     // on finance event
     socket.on("Finance", (data) => {
-      //console.log("[App.js] Finance Update: ", data, currentTime()); // for debug
+      //console.warn("[App.js] Finance Update: ", data, currentTime()); // for debug
       this.setState({ financeResponse: data });
     });
     // on sports event
     socket.on("Sports", (data) => {
-      //console.log("[App.js] Sports Update: ", data, currentTime()); // for debug
+      //console.warn("[App.js] Sports Update: ", data, currentTime()); // for debug
       this.setState({ sportsResponse: data });
     });
   }

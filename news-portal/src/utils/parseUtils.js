@@ -27,3 +27,30 @@ export const weatherCode = {
   7102: "Light Ice Pellets",
   8000: "Thunderstorm",
 };
+
+// Months array: 3 starting letters of month name
+export const monthsArr = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+// Days of week array: full day name
+export const daysArr = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
