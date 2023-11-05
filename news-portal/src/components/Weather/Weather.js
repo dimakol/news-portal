@@ -32,6 +32,7 @@ class Weather extends PureComponent {
     //console.log("[Weather.js] render");  // for debug
 
     const { isWeekly } = this.state;
+    const { currently, daily } = this.props.response;
 
     return (
       <Card
@@ -48,22 +49,14 @@ class Weather extends PureComponent {
           ) : !isWeekly ? (
             // current weather
             <CurrentWeather
-              temperature={Math.round(
-                this.props.response.currently.values.temperature
-              )}
-              icon={setWeatherIcon(
-                this.props.response.currently.values.weatherCode
-              )}
-              description={
-                weatherCode[this.props.response.currently.values.weatherCode]
-              }
-              time={unixTimeStamptoDateTime(
-                dateToTimeStamp(this.props.response.currently.time)
-              )}
+              temperature={Math.round(currently.values.temperature)}
+              icon={setWeatherIcon(currently.values.weatherCode)}
+              description={weatherCode[currently.values.weatherCode]}
+              time={unixTimeStamptoDateTime(dateToTimeStamp(currently.time))}
             />
           ) : (
             // weekly weather
-            this.props.response.daily.map((dayData, index) => (
+            daily.map((dayData, index) => (
               <DayCard
                 key={index}
                 day={unixTimeStamptoDayOfWeek(dateToTimeStamp(dayData.time))}
