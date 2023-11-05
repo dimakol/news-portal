@@ -32,6 +32,26 @@ const queryParams = {
   apikey: FINANCE_API_KEY,
 };
 
+const RESPONSE_KEYS = {
+  META_DATA: "Meta Data",
+  TIME_SERIES: "Time Series (5min)",
+};
+const META_DATA = {
+  INFORMATION: "1. Information",
+  SYMBOL: "2. Symbol",
+  LAST_REFRESHED: "3. Last Refreshed",
+  INTERVAL: "4. Interval",
+  OUTPUT_SIZE: "5. Output Size",
+  TIME_ZONE: "6. Time Zone",
+};
+const TIME_SERIES_DATA = {
+  OPEN: "1. open",
+  HIGH: "2. high",
+  LOW: "3. low",
+  CLOSE: "4. close",
+  VOLUME: "5. volume",
+};
+
 var interval;
 // update per 5 minutes
 const updateTime = 5 * 60 * 1000;
@@ -44,9 +64,35 @@ const getFinanceFromApiAndEmit = async (socket) => {
       params: queryParams,
     });
     // API call frequency is 5 calls per minute and 500 calls per day.
-    if (!response.data.hasOwnProperty("Note"))
+    if (!response.data.hasOwnProperty("Note")) {
+      const timeSeries = response.data[RESPONSE_KEYS.TIME_SERIES];
+      // filter keys by same date as last refreshed
+      const timeSeriesAxisX = Object.keys(timeSeries).filter(
+        (datetime) =>
+          datetime.split(" ")[0] ===
+          response.data[RESPONSE_KEYS.META_DATA][
+            META_DATA.LAST_REFRESHED
+          ].split(" ")[0]
+      );
+      // map by close values sliced by same date as last refreshed
+      const timeSeriesAxisY = Object.values(timeSeries)
+        .slice(0, timeSeriesAxisX.length)
+        .map((timeSeriesValue) => timeSeriesValue[TIME_SERIES_DATA.CLOSE]);
+      const customResponse = {
+        symbol: response.data[RESPONSE_KEYS.META_DATA][META_DATA.SYMBOL],
+        lastUpdated:
+          response.data[RESPONSE_KEYS.META_DATA][META_DATA.LAST_REFRESHED],
+        // using reduce() method to make object for the chart of keys(x axis): values(y axis)
+        data: timeSeriesAxisX.reduce((acc, element, index) => {
+          return {
+            ...acc,
+            [element]: timeSeriesAxisY[index],
+          };
+        }, {}),
+      };
       // emitting a new message. It will be consumed by the client
-      socket.emit("Finance", response.data);
+      socket.emit("Finance", customResponse);
+    }
   } catch (error) {
     console.error(`Finance Error: ${error.code}`);
   }

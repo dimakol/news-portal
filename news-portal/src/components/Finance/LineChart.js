@@ -14,8 +14,9 @@ class LineChart extends Component {
    * Updating the data of the chart
    */
   componentDidUpdate() {
-    this.myChart.data.labels = this.props.labels;
-    this.myChart.data.datasets[0].data = this.props.data;
+    const { labels, data } = this.props;
+    this.myChart.data.labels = labels;
+    this.myChart.data.datasets[0].data = data;
     this.myChart.update();
   }
 
@@ -23,6 +24,7 @@ class LineChart extends Component {
    * Adding the line chart for the first time
    */
   componentDidMount() {
+    const { label, labels, data } = this.props;
     this.myChart = new Chart(this.chartRef.current, {
       type: "line",
       options: {
@@ -46,11 +48,11 @@ class LineChart extends Component {
         },
       },
       data: {
-        labels: this.props.labels,
+        labels: labels, // x Axis - the time interval
         datasets: [
           {
-            label: this.props.label,
-            data: this.props.data,
+            label: label,
+            data: data, // Points on the chart
             fill: "origin",
             backgroundColor: "#d5eee2", // light green
             pointRadius: 2,
@@ -68,16 +70,6 @@ class LineChart extends Component {
    */
   findMinforyAxes() {
     const minValue = Math.min(...this.props.data);
-    // const minValueDecimal = minValue - Math.floor(minValue);
-    // let minYAxes;
-    // if (
-    //   (minValueDecimal >= 0.25 && minValueDecimal <= 0.49) ||
-    //   (minValueDecimal >= 0.75 && minValueDecimal <= 0.99)
-    // )
-    //   minYAxes = Math.round(minValue * 2) / 2 - 0.5;
-    // else minYAxes = Math.round(minValue * 2) / 2;
-    // return minYAxes;
-
     const base = 5;
     return base * Math.floor(minValue / base);
   }
@@ -87,16 +79,6 @@ class LineChart extends Component {
    */
   findMaxforyAxes() {
     const maxValue = Math.max(...this.props.data);
-    // const maxValueDecimal = maxValue - Math.floor(maxValue);
-    // let maxYAxes;
-    // if (
-    //   (maxValueDecimal > 0 && maxValueDecimal <= 0.24) ||
-    //   (maxValueDecimal > 0.5 && maxValueDecimal <= 0.74)
-    // )
-    //   maxYAxes = Math.round(maxValue * 2) / 2 + 0.5;
-    // else maxYAxes = Math.round(maxValue * 2) / 2;
-    // return maxYAxes;
-
     const base = 5;
     return base * Math.ceil(maxValue / base);
   }
