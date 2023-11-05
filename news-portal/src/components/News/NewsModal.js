@@ -17,36 +17,34 @@ const NewsModal = ({
   description,
   url,
   urlToImage,
-}) => {
-  return (
-    <Modal size="lg" scrollable show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      {(description.length || url.length || urlToImage.length) && (
-        <Modal.Body>
-          <p>{description}</p>
-          <p className="center-text">
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              The direct URL to the article.
-            </a>
-          </p>
-          {urlToImage.length && (
-            <img
-              src={urlToImage}
-              alt="Article Img"
-              className="medium center-image"
-            ></img>
-          )}
-        </Modal.Body>
-      )}
-      <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
-};
+}) => (
+  <Modal size="lg" scrollable show={show} onHide={handleClose}>
+    <Modal.Header closeButton>
+      <Modal.Title>{title}</Modal.Title>
+    </Modal.Header>
+    {(description.length || url.length || urlToImage.length) && (
+      <Modal.Body>
+        <p>{description}</p>
+        <p className="center-text">
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            The direct URL to the article.
+          </a>
+        </p>
+        {urlToImage.length && (
+          <img
+            src={urlToImage}
+            alt="Article Img"
+            className="medium center-image"
+          ></img>
+        )}
+      </Modal.Body>
+    )}
+    <Modal.Footer>
+      <Button variant="primary" onClick={handleClose}>
+        Close
+      </Button>
+    </Modal.Footer>
+  </Modal>
+);
 
 export default NewsModal;

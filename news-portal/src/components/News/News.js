@@ -59,14 +59,16 @@ class News extends PureComponent {
           </Card.Body>
         </Card>
 
-        <NewsModal
-          show={showModal}
-          handleClose={this.handleClose}
-          title={title}
-          description={description}
-          url={url}
-          urlToImage={urlToImage}
-        />
+        {this.props.response && (
+          <NewsModal
+            show={showModal}
+            handleClose={this.handleClose}
+            title={title}
+            description={description}
+            url={url}
+            urlToImage={urlToImage}
+          />
+        )}
       </React.Fragment>
     );
   }
