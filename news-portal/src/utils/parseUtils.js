@@ -54,3 +54,12 @@ export const daysArr = [
   "Friday",
   "Saturday",
 ];
+
+/**
+ * pad the input at the start of it using the sting zero
+ * until it reaches the double digit
+ * @param {number} input
+ */
+export const padByZero = (input) => {
+  return input.toString().padStart(2, "0");
+};

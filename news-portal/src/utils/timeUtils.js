@@ -1,4 +1,4 @@
-import { daysArr, monthsArr } from "./parseUtils";
+import { daysArr, monthsArr, padByZero } from "./parseUtils";
 
 /**
  * Convert a Unix timestamp to date time in "MM-dd hh:mm" format.
@@ -18,11 +18,11 @@ export const unixTimeStamptoDateTime = (
   // Day
   const day = date.getDate();
   // Hours
-  const hours = date.getHours();
+  const hours = padByZero(date.getHours());
   // Minutes
-  const minutes = `0${date.getMinutes()}`.slice(-2);
+  const minutes = padByZero(date.getMinutes());
   // Seconds
-  const seconds = `0${date.getSeconds()}`.slice(-2);
+  const seconds = padByZero(date.getSeconds());
 
   // The returned time
   let formatedTime;
@@ -101,11 +101,11 @@ export const formatISODate = (ISODate) => {
 export const currentTime = () => {
   const today = new Date();
   // Hours
-  const hours = `0${today.getHours()}`.slice(-2);
+  const hours = padByZero(today.getHours());
   // Minutes
-  const minutes = `0${today.getMinutes()}`.slice(-2);
+  const minutes = padByZero(today.getMinutes());
   // Seconds
-  const seconds = `0${today.getSeconds()}`.slice(-2);
+  const seconds = padByZero(today.getSeconds());
   // Time in required format
   const time = `${hours}:${minutes}:${seconds}`;
   return time;
