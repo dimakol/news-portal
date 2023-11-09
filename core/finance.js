@@ -35,6 +35,7 @@ const queryParams = {
 const RESPONSE_KEYS = {
   META_DATA: "Meta Data",
   TIME_SERIES: "Time Series (5min)",
+  INFORMATION: "Information",
 };
 const META_DATA = {
   INFORMATION: "1. Information",
@@ -63,8 +64,7 @@ const getFinanceFromApiAndEmit = async (socket) => {
     const response = await axios.get(FINANCE_API_URL, {
       params: queryParams,
     });
-    // API call frequency is 5 calls per minute and 500 calls per day.
-    if (!response.data.hasOwnProperty("Note")) {
+    if (!response.data.hasOwnProperty(RESPONSE_KEYS.INFORMATION)) {
       const timeSeries = response.data[RESPONSE_KEYS.TIME_SERIES];
       // filter keys by same date as last refreshed
       const timeSeriesAxisX = Object.keys(timeSeries).filter(
@@ -92,9 +92,12 @@ const getFinanceFromApiAndEmit = async (socket) => {
       };
       // emitting a new message. It will be consumed by the client
       socket.emit("Finance", customResponse);
+    } else {
+      // API call rate limit
+      throw response.data[RESPONSE_KEYS.INFORMATION];
     }
   } catch (error) {
-    console.error(`Finance Error: ${error.code}`);
+    console.error(`Finance Error: ${error}`);
   }
 };
 
