@@ -4,10 +4,10 @@ import { liveMatchTime } from "../../utils/timeUtils";
 
 /**
  * Five live football matches
- * @param {*} props
+ * @param {array} matches
  */
-const matches = (props) =>
-  props.matches
+const matches = ({ matches }) =>
+  matches
     .filter((match, index) => index < 5)
     .map((match, index) => {
       return (
