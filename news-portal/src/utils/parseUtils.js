@@ -60,6 +60,6 @@ export const daysArr = [
  * until it reaches the double digit
  * @param {number} input
  */
-export const padByZero = (input) => {
+export const padTo2Digits = (input) => {
   return input.toString().padStart(2, "0");
 };
