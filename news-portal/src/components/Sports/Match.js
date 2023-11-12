@@ -7,13 +7,13 @@ const STATUS = {
 
 /**
  * Live football match
- * @param {number} id
- * @param {string} status
- * @param {string} time
- * @param {string} homeTeamName
- * @param {string} awayTeamName
- * @param {*} homeTeamScore
- * @param {*} awayTeamScore
+ * @param {number} id - match id
+ * @param {string} status - match status: IN_PLAY or PAUSED
+ * @param {string} time - live match time / 1st H / 2nd H
+ * @param {string} homeTeamName - the name of the home team
+ * @param {string} awayTeamName - the name of the away team
+ * @param {number} homeTeamScore - the score of the home team
+ * @param {number} awayTeamScore - the score of the away team
  */
 const match = ({
   id,

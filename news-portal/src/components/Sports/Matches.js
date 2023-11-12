@@ -9,11 +9,11 @@ import { liveMatchTime } from "../../utils/timeUtils";
 const matches = ({ matches }) =>
   matches
     .filter((match, index) => index < 5)
-    .map((match, index) => {
+    .map((match) => {
       return (
         <Match
-          key={index}
-          id={index}
+          key={match.id}
+          id={match.id}
           status={match.status}
           time={liveMatchTime(
             match.utcDate,
