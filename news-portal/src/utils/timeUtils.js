@@ -2,9 +2,9 @@ import { daysArr, monthsArr, padTo2Digits } from "./parseUtils";
 
 /**
  * Convert a Unix timestamp to date time in "MM-dd hh:mm" format.
- * @param {Number} unixTimeStamp
- * @param {Boolean} showSeconds - default = false, if this parameter is true then the seconds will also be shown.
- * @param {Boolean} showDate - default = true, if this parameter is false then the MM-dd(month and day) will not be shown.
+ * @param {number} unixTimeStamp
+ * @param {boolean} showSeconds - default = false, if this parameter is true then the seconds will also be shown.
+ * @param {boolean} showDate - default = true, if this parameter is false then the MM-dd(month and day) will not be shown.
  */
 export const unixTimeStamptoDateTime = (
   unixTimeStamp,
@@ -55,7 +55,7 @@ export const unixTimeStamptoDateTime = (
 
 /**
  * Convert a Unix timestamp to date in "MM dd" format.
- * @param {Number} unixTimeStamp
+ * @param {number} unixTimeStamp
  */
 export const unixTimeStamptoDate = (unixTimeStamp) => {
   // Convert timestamp to milliseconds
@@ -69,7 +69,7 @@ export const unixTimeStamptoDate = (unixTimeStamp) => {
 
 /**
  * Convert a Unix timestamp to day of week.
- * @param {Number} unixTimeStamp
+ * @param {number} unixTimeStamp
  */
 export const unixTimeStamptoDayOfWeek = (unixTimeStamp) => {
   // Convert timestamp to milliseconds
@@ -105,7 +105,7 @@ export const formatDate = (date) => {
 
 /**
  * Replace T with empty whitespace and replace Z with no character
- * @param {String} ISODate - ISO 8601 format - "yyyy-mm-ddThh:mm:ssZ"
+ * @param {string} ISODate - ISO 8601 format - "yyyy-mm-ddThh:mm:ssZ"
  * @returns "yyyy-mm-dd hh:mm:ss" format
  */
 export const formatISODate = (ISODate) => {
@@ -130,7 +130,7 @@ export const currentTime = () => {
 
 /**
  * Convert time to seconds only.
- * @param {String} time - "HH:MM:SS" as well as "MM:SS" or "SS"
+ * @param {string} time - "HH:MM:SS" as well as "MM:SS" or "SS"
  */
 const hmsToSecondsOnly = (time) => {
   let splittedTime = time.split(":");
@@ -170,9 +170,9 @@ const addHours = (date, hours) => {
 
 /**
  * Calculates and return the live time of the match in minutes.
- * @param {String} startDateTimeUTC - The start date time of the match in UTC format: YYYY-MM-DDTHH:MM:SSZ
- * @param {String} lastUpdatedDateTime - The last updated date time from server in format: YYYY-MM-DDTHH:MM:SSZ
- * @param {Boolean} afterHalfTime - true if the match at second half and false if the match at first half
+ * @param {string} startDateTimeUTC - The start date time of the match in UTC format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {string} lastUpdatedDateTime - The last updated date time from server in format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {boolean} afterHalfTime - true if the match at second half and false if the match at first half
  */
 export const liveMatchTime = (
   startDateTimeUTC,
