@@ -87,6 +87,23 @@ export const dateToTimeStamp = (strDate) => {
 };
 
 /**
+ * Format date object to yyyy-mm-ddThh:mm:ssZ format
+ * @param {Date} date
+ * @returns yyyy-mm-ddThh:mm:ssZ format
+ */
+export const formatDate = (date) => {
+  return `${[
+    date.getFullYear(),
+    padTo2Digits(date.getMonth() + 1),
+    padTo2Digits(date.getDate()),
+  ].join("-")}T${[
+    padTo2Digits(date.getHours()),
+    padTo2Digits(date.getMinutes()),
+    padTo2Digits(date.getSeconds()),
+  ].join(":")}Z`;
+};
+
+/**
  * Replace T with empty whitespace and replace Z with no character
  * @param {String} ISODate - ISO 8601 format - "yyyy-mm-ddThh:mm:ssZ"
  * @returns "yyyy-mm-dd hh:mm:ss" format
@@ -129,29 +146,65 @@ const hmsToSecondsOnly = (time) => {
 };
 
 /**
+ * Calculate time differences in hours between two dates
+ * @param {Date} dateTime2
+ * @param {Date} dateTime1
+ * @returns the time difference in hours
+ */
+const diffHours = (dateTime2, dateTime1) => {
+  let diff = (dateTime2.getTime() - dateTime1.getTime()) / 1000;
+  diff /= 60 * 60;
+  return Math.round(diff);
+};
+
+/**
+ * Add hours to date
+ * @param {Date} date
+ * @param {number} hours
+ * @returns updated date with the hours that added/removed
+ */
+const addHours = (date, hours) => {
+  date.setTime(date.getTime() + hours * 60 * 60 * 1000);
+  return date;
+};
+
+/**
  * Calculates and return the live time of the match in minutes.
- * @param {String} startDate - The start date of the match in format: YYYY-MM-DDTHH:MM:SSZ
- * @param {String} lastUpdatedDate - The last updated date of the match in format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {String} startDateTimeUTC - The start date time of the match in UTC format: YYYY-MM-DDTHH:MM:SSZ
+ * @param {String} lastUpdatedDateTime - The last updated date time from server in format: YYYY-MM-DDTHH:MM:SSZ
  * @param {Boolean} afterHalfTime - true if the match at second half and false if the match at first half
  */
-export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
-  const slicedStartDate = startDate.slice(0, startDate.length - 1);
-  const slicedLastUpdatedDate = lastUpdatedDate.slice(
-    0,
-    lastUpdatedDate.length - 1
+export const liveMatchTime = (
+  startDateTimeUTC,
+  lastUpdatedDateTime,
+  afterHalfTime
+) => {
+  const [matchStartDate, matchStartTime] = formatISODate(
+    formatDate(new Date(startDateTimeUTC))
+  ).split(" ");
+
+  // difference in hours between current date from computer and the last updated date from server
+  const diffHoursLastUpdate = diffHours(
+    new Date(),
+    new Date(lastUpdatedDateTime)
   );
-  const splittedStartDate = slicedStartDate.split("T");
-  const splittedLastUpdatedDate = slicedLastUpdatedDate.split("T");
+  // add the difference in hours to last updated date from server to get the last updated date in local time zone
+  const lastUpdatedDateTimeLocal = addHours(
+    new Date(lastUpdatedDateTime),
+    diffHoursLastUpdate
+  );
+  const [matchCurrentDate, matchCurrentTime] = formatISODate(
+    formatDate(new Date(lastUpdatedDateTimeLocal))
+  ).split(" ");
 
   // minutes
   let liveTime;
   // string to show
   let strTime;
   // The start date and the last update date are the same
-  if (splittedStartDate[0] === splittedLastUpdatedDate[0]) {
+  if (matchStartDate === matchCurrentDate) {
     liveTime =
-      hmsToSecondsOnly(splittedLastUpdatedDate[1]) -
-      hmsToSecondsOnly(splittedStartDate[1]);
+      hmsToSecondsOnly(matchCurrentTime) - hmsToSecondsOnly(matchStartTime);
     // Convert to minutes
     liveTime = Math.floor(liveTime / 60);
     strTime = `${liveTime}'`;
@@ -159,13 +212,13 @@ export const liveMatchTime = (startDate, lastUpdatedDate, afterHalfTime) => {
     if (afterHalfTime) {
       // Not returning the live time after half time
       // because we don't have enought data from the API about how much time takes the injury time
-      strTime = `2nd H`;
+      strTime = `2nd HALF`;
     }
     // First Half
     else {
       if (liveTime > 45) {
         // Not returning the live time before half time
-        strTime = `1st H`;
+        strTime = `1st HALF`;
       }
     }
   }

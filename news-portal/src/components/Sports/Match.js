@@ -9,7 +9,7 @@ const STATUS = {
  * Live football match
  * @param {number} id - match id
  * @param {string} status - match status: IN_PLAY or PAUSED
- * @param {string} time - live match time / 1st H / 2nd H
+ * @param {string} time - live match time / 1st HALF / 2nd HALF
  * @param {string} homeTeamName - the name of the home team
  * @param {string} awayTeamName - the name of the away team
  * @param {number} homeTeamScore - the score of the home team
@@ -28,7 +28,7 @@ const match = ({
     {status === STATUS.IN_PLAY ? (
       <div className="inline red">{time} </div>
     ) : (
-      <div className="inline red">HT </div>
+      <div className="inline red">HALF TIME </div>
     )}
     <div className="inline">{homeTeamName} </div>
     <div className="inline red">
