@@ -113,7 +113,7 @@ const getWeatherFromApiAndEmit = async (socket) => {
 ## API Reference
 
 - https://newsapi.org/docs - News API
-- https://darksky.net/dev/docs - Dark Sky API
+- https://www.tomorrow.io/weather-api/ - Tomorrow.io API
 - https://www.alphavantage.co/documentation/ - Alpha Vantage API
 - https://www.football-data.org/documentation/quickstart - Football-Data API
 
