@@ -47,28 +47,50 @@ The motivation behind this project was to build a web application that connects 
 Connecting to third-party API and emitting the JSON result to the client using socket
 
 ```
-//news.js
+//weather.js
 
 const axios = require("axios");
-const { newsKey } = require('../config');
+const { WEATHER_API_KEY } = require("../config");
 
-/** function that gets the JSON result for news from News API and emit it to client */
-const getNewsApiAndEmit = async socket => {
-    try {
-        // getting the data from News API
-        const response = await axios.get("https://newsapi.org/v2/top-headlines", {
-            params: {
-                country: 'us',
-                pageSize: 1,
-                apiKey: newsKey
-            }
-        });
-        // emitting a new message. It will be consumed by the client
-        socket.emit("News", response.data.articles[0]);
-    }
-    catch (error) {
-        console.error(`News Error: ${error.code}`);
-    }
+const WEATHER_API_URL = "https://api.tomorrow.io/v4/weather";
+// current weather data, daily forecasts for the next 5 days
+const ENDPOINTS = [
+  `${WEATHER_API_URL}/realtime`,
+  `${WEATHER_API_URL}/forecast`,
+];
+
+const CITY_NAME = "ashkelon";
+// possible units of measurement
+const UNITS = {
+  METRIC: "metric",
+  IMPERIAL: "imperial",
+};
+
+const queryParams = {
+  location: CITY_NAME,
+  apikey: WEATHER_API_KEY,
+  units: UNITS.METRIC,
+};
+
+// function that gets the JSON result for current weather, 5 day forecast from Tomorrow API and emit it to client
+const getWeatherFromApiAndEmit = async (socket) => {
+  // making concurrent API requests
+  Promise.all(
+    ENDPOINTS.map((endpoint) =>
+      axios.get(endpoint, {
+        params: queryParams,
+      })
+    )
+  )
+    .then(([{ data: weatherResponse }, { data: forecastResponse }]) => {
+      const customResponse = {
+        currently: weatherResponse.data,
+        daily: forecastResponse.timelines.daily,
+      };
+      // emitting a new message. It will be consumed by the client
+      socket.emit("Weather", customResponse);
+    })
+    .catch((error) => console.error(`Weather Error: ${error}`));
 };
 ```
 
