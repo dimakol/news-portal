@@ -1,5 +1,5 @@
 {
-  "name": "my-news-portal-client",
+  "name": "news-portal-client",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
