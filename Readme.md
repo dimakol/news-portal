@@ -101,13 +101,13 @@ const getWeatherFromApiAndEmit = async (socket) => {
     git, npm and node softwares should be installed
     before moving on
 
-- git clone https://github.com/dimakol/News-Portal.git
-- cd News-Portal/
+- git clone https://github.com/dimakol/news-portal.git
+- cd news-portal/
 - npm install - installing the node modules at server folder.
 - cd news-portal/
 - npm install - installing the node modules at client folder.
 - cd .. - returning to the root folder of the project.
-- creating .env file like .env.example file in the root of the folder and setting your API keys instead of the asterisks (\*\*\*)
+- creating .env file like .env.example file in the root of the folder and setting your API keys instead of the 'your_api_key'
 - npm run dev
 
 ## API Reference
