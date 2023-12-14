@@ -23,19 +23,39 @@ const match = ({
   awayTeamName,
   homeTeamScore,
   awayTeamScore,
-}) => (
-  <div className="margin-top-20" key={id}>
-    {status === STATUS.IN_PLAY ? (
-      <div className="inline red">{time} </div>
-    ) : (
-      <div className="inline red">HALF TIME </div>
-    )}
-    <div className="inline">{homeTeamName} </div>
-    <div className="inline red">
-      {homeTeamScore} - {awayTeamScore}
+}) => {
+  /**
+   * returns match status depends the status param
+   * @param {string} status - match status: "IN_PLAY" or "PAUSED"
+   * @param {string} time - live match time / "1st HALF" / "2nd HALF"
+   * returns live match time / "1st HALF" / "HALF TIME" / "2nd HALF"
+   */
+  const matchStatus = (status, time) => {
+    let returnStatus = "";
+    // status exists
+    if (status) {
+      // IN_PLAY
+      if (status.length && status === STATUS.IN_PLAY) {
+        returnStatus = time;
+      }
+      // PAUSED
+      else if (status.length && status === STATUS.PAUSED) {
+        returnStatus = "HALF TIME";
+      }
+    }
+    return returnStatus;
+  };
+
+  return (
+    <div className="margin-top-20" key={id}>
+      <div className="inline red">{matchStatus(status, time)} </div>
+      <div className="inline">{homeTeamName} </div>
+      <div className="inline red">
+        {homeTeamScore} - {awayTeamScore}
+      </div>
+      <div className="inline"> {awayTeamName}</div>
     </div>
-    <div className="inline"> {awayTeamName}</div>
-  </div>
-);
+  );
+};
 
 export default match;

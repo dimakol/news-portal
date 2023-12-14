@@ -49,22 +49,22 @@ class Weather extends PureComponent {
           ) : !isWeekly ? (
             // current weather
             <CurrentWeather
-              temperature={Math.round(currently.values.temperature)}
-              icon={setWeatherIcon(currently.values.weatherCode)}
-              description={weatherCode[currently.values.weatherCode]}
-              time={unixTimeStamptoDateTime(dateToTimeStamp(currently.time))}
+              temperature={Math.round(currently?.values?.temperature)}
+              icon={setWeatherIcon(currently?.values?.weatherCode)}
+              description={weatherCode[currently?.values?.weatherCode]}
+              time={unixTimeStamptoDateTime(dateToTimeStamp(currently?.time))}
             />
           ) : (
             // weekly weather
             daily.map((dayData, index) => (
               <DayCard
                 key={index}
-                day={unixTimeStamptoDayOfWeek(dateToTimeStamp(dayData.time))}
-                date={unixTimeStamptoDate(dateToTimeStamp(dayData.time))}
-                icon={setWeatherIcon(dayData.values.weatherCodeMax)}
-                temperatureMin={Math.round(dayData.values.temperatureMin)}
-                temperatureMax={Math.round(dayData.values.temperatureMax)}
-                description={weatherCode[dayData.values.weatherCodeMax]}
+                day={unixTimeStamptoDayOfWeek(dateToTimeStamp(dayData?.time))}
+                date={unixTimeStamptoDate(dateToTimeStamp(dayData?.time))}
+                icon={setWeatherIcon(dayData?.values?.weatherCodeMax)}
+                temperatureMin={Math.round(dayData?.values?.temperatureMin)}
+                temperatureMax={Math.round(dayData?.values?.temperatureMax)}
+                description={weatherCode[dayData?.values?.weatherCodeMax]}
               />
             ))
           )}

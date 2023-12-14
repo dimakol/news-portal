@@ -109,7 +109,7 @@ export const formatDate = (date) => {
  * @returns "yyyy-mm-dd hh:mm:ss" format
  */
 export const formatISODate = (ISODate) => {
-  return ISODate.replace("T", " ").replace("Z", "");
+  return ISODate?.replace("T", " ").replace("Z", "");
 };
 
 /**

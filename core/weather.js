@@ -40,7 +40,7 @@ const getWeatherFromApiAndEmit = async (socket) => {
     .then(([{ data: weatherResponse }, { data: forecastResponse }]) => {
       const customResponse = {
         currently: weatherResponse.data,
-        daily: forecastResponse.timelines.daily,
+        daily: forecastResponse.timelines?.daily,
       };
       // emitting a new message. It will be consumed by the client
       socket.emit("Weather", customResponse);

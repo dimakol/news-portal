@@ -9,7 +9,6 @@ import Matches from "../Sports/Matches";
 class Sports extends PureComponent {
   render() {
     //console.log("[Sports.js] render");   // for debug
-    // console.log("Sports: ", this.props.response);    // for debug
     return (
       <Card className="col-md-4" border="dark">
         <Card.Body>

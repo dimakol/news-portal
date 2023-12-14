@@ -64,34 +64,40 @@ const getFinanceFromApiAndEmit = async (socket) => {
     const response = await axios.get(FINANCE_API_URL, {
       params: queryParams,
     });
-    if (!response.data.hasOwnProperty(RESPONSE_KEYS.INFORMATION)) {
+    // API call rate limit is valid
+    if (!response.data[RESPONSE_KEYS.INFORMATION]) {
       const timeSeries = response.data[RESPONSE_KEYS.TIME_SERIES];
-      // filter keys by same date as last refreshed
-      const timeSeriesAxisX = Object.keys(timeSeries).filter(
-        (datetime) =>
-          datetime.split(" ")[0] ===
-          response.data[RESPONSE_KEYS.META_DATA][
-            META_DATA.LAST_REFRESHED
-          ].split(" ")[0]
-      );
-      // map by close values sliced by same date as last refreshed
-      const timeSeriesAxisY = Object.values(timeSeries)
-        .slice(0, timeSeriesAxisX.length)
-        .map((timeSeriesValue) => timeSeriesValue[TIME_SERIES_DATA.CLOSE]);
-      const customResponse = {
-        symbol: response.data[RESPONSE_KEYS.META_DATA][META_DATA.SYMBOL],
-        lastUpdated:
-          response.data[RESPONSE_KEYS.META_DATA][META_DATA.LAST_REFRESHED],
-        // using reduce() method to make object for the chart of keys(x axis): values(y axis)
-        data: timeSeriesAxisX.reduce((acc, element, index) => {
-          return {
-            ...acc,
-            [element]: timeSeriesAxisY[index],
-          };
-        }, {}),
-      };
-      // emitting a new message. It will be consumed by the client
-      socket.emit("Finance", customResponse);
+      if (timeSeries) {
+        // filter keys by same date as last refreshed
+        const timeSeriesAxisX = Object.keys(timeSeries).filter(
+          (datetime) =>
+            datetime.split(" ")[0] ===
+            response.data[RESPONSE_KEYS.META_DATA][
+              META_DATA.LAST_REFRESHED
+            ].split(" ")[0]
+        );
+        // map by close values sliced by same date as last refreshed
+        const timeSeriesAxisY = Object.values(timeSeries)
+          .slice(0, timeSeriesAxisX.length)
+          .map((timeSeriesValue) => timeSeriesValue[TIME_SERIES_DATA.CLOSE]);
+        const customResponse = {
+          symbol: response.data[RESPONSE_KEYS.META_DATA][META_DATA.SYMBOL],
+          lastUpdated:
+            response.data[RESPONSE_KEYS.META_DATA][META_DATA.LAST_REFRESHED],
+          // using reduce() method to make object for the chart of keys(x axis): values(y axis)
+          data: timeSeriesAxisX.reduce((acc, element, index) => {
+            return {
+              ...acc,
+              [element]: timeSeriesAxisY[index],
+            };
+          }, {}),
+        };
+        // emitting a new message. It will be consumed by the client
+        socket.emit("Finance", customResponse);
+      } else {
+        // property not exists
+        throw RESPONSE_KEYS.TIME_SERIES;
+      }
     } else {
       // API call rate limit
       throw response.data[RESPONSE_KEYS.INFORMATION];
