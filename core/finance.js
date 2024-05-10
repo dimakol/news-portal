@@ -104,6 +104,7 @@ const getFinanceFromApiAndEmit = async (socket) => {
     }
   } catch (error) {
     console.error(`Finance Error: ${error}`);
+    socket.emit("Finance", { errorMessage: error });
   }
 };
 

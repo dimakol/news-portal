@@ -11,22 +11,24 @@ class Finance extends PureComponent {
   render() {
     //console.log("[Finance.js] render");  // for debug
 
-    const { symbol, lastUpdated, data } = this.props.response;
+    const renderCardTitle = () => (
+      <Card.Title>
+        <b>Finance</b>
+        {this.props.response && !this.props.response.errorMessage && (
+          <img src={teslaMotors} alt={"Tesla-Motors"} className="small"></img>
+        )}
+      </Card.Title>
+    );
+
+    const { symbol, lastUpdated, data, errorMessage } = this.props.response;
     return (
       <Card className="col-md-4" border="dark">
         <Card.Body>
-          <Card.Title>
-            <b>Finance</b>
-            {this.props.response && (
-              <img
-                src={teslaMotors}
-                alt={"Tesla-Motors"}
-                className="small"
-              ></img>
-            )}
-          </Card.Title>
+          {renderCardTitle()}
           {!this.props.response ? (
             <Card.Text>Loading...</Card.Text>
+          ) : errorMessage ? (
+            <Card.Text>{errorMessage}</Card.Text>
           ) : (
             <div>
               <LineChart
