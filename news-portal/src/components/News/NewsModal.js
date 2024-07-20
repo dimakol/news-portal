@@ -22,7 +22,7 @@ const NewsModal = ({
     <Modal.Header closeButton>
       <Modal.Title>{title}</Modal.Title>
     </Modal.Header>
-    {(description.length || url.length || urlToImage.length) && (
+    {(description?.length || url?.length || urlToImage?.length) && (
       <Modal.Body>
         <p>{description}</p>
         <p className="center-text">
@@ -30,7 +30,7 @@ const NewsModal = ({
             The direct URL to the article.
           </a>
         </p>
-        {urlToImage.length && (
+        {urlToImage?.length && (
           <img
             src={urlToImage}
             alt="Article Img"
